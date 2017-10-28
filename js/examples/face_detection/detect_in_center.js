@@ -91,8 +91,7 @@
 				str = "min: " + minWidth.toFixed(0) + " max: " + maxWidth.toFixed(0);
 			}
 
-			brfv4Example.dom.updateHeadline("BRFv4 - basic - face detection - detect face in " +
-				"center\nLimit detection area to the center of the image. " + str);
+			brfv4Example.dom.updateHeadline("test. " + str);
 		}
 	}
 

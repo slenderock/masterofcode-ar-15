@@ -11,7 +11,7 @@
 	"use strict";
 
 	var urlMap = {
-		"Marcel":		"assets/brfv4_portrait_marcel.jpg",
+		"Marcel":		"assets/test2.png",
 		"Chris":		"assets/brfv4_portrait_chris.jpg",
 		"woman old":	"assets/brfv4_woman_old.jpg",
 		"women young":	"assets/brfv4_women_young.jpg",
