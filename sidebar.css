@@ -1,0 +1,22 @@
+body {
+  background-image: url('halloback.jpg');
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+}
+.sidebar h2 {
+  font-family: Arial, sans-serif;
+  font-size: 30px;
+  text-transform: uppercase;
+  color: #dbdbdb
+}
+.mask-list {
+  margin-left: 5%;
+  list-style: none;
+}
+
+.mask-list img {
+  width: 7%;
+  margin-top: 1%;
+}
+
