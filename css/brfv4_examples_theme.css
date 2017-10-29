@@ -35,8 +35,8 @@ video {
 
 #_content {
   position: absolute;
-  width: 640px;
-  height: 480px;
+  width: 999px;
+  height: 562px;
   background-color: #f7f7f7;
   margin: auto;
   top: 0;
@@ -47,7 +47,7 @@ video {
 #_progressBar {
   position: absolute;
   width: 1px;
-  height: 480px;
+  height: 562px;
   background-color: #000000;
   margin: auto;
   top: 0;
@@ -56,7 +56,7 @@ video {
 
 #_subline {
   position: absolute;
-  width: 640px;
+  width: 999px;
   height: 40px;
   background-color: transparent;
   margin: auto;
@@ -67,7 +67,7 @@ video {
 
 #_highlight {
   position: absolute;
-  width: 640px;
+  width: 999px;
   height: auto;
   background-color: transparent;
   margin: auto;
@@ -77,11 +77,11 @@ video {
   font-size: 8pt;
 }
 
-#_brfv4_logo {
+#bats {
   position: absolute;
   width: 200px;
   left: 0;
-  bottom: 0;
+  top: 0;
   opacity: 0.5;
 }
 
@@ -96,7 +96,7 @@ video {
 #_settingsLeft {
   position: absolute;
   width: 160px;
-  height: 480px;
+  height: 562px;
   background-color: transparent;
 }
 

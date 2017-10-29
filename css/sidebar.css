@@ -8,11 +8,17 @@ body {
   background-repeat: no-repeat;
 }
 
-.sidebar h2 {
+.sidebar{
+  height: 85vh;
+  overflow-y: scroll;
+}
+
+.face-title {
   font-family: Arial, sans-serif;
   font-size: 30px;
   text-transform: uppercase;
-  margin-left: 100px;
+  margin-bottom: 0;
+  margin-left: 8vw;
   color: #dbdbdb
 }
 
