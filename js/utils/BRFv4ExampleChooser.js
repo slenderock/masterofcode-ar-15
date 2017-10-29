@@ -15,6 +15,10 @@
     "Masc 1": ["assets/brfv4_face_textures1.js", "js/examples/face_tracking/face_texture_overlay.js"],
     "Masc 2": ["assets/brfv4_face_textures2.js", "js/examples/face_tracking/face_texture_overlay.js"],
     "Masc 3": ["assets/brfv4_face_textures3.js", "js/examples/face_tracking/face_texture_overlay.js"],
+    "Masc 4": ["assets/brfv4_face_textures4.js", "js/examples/face_tracking/face_texture_overlay.js"],
+    "Masc 5": ["assets/brfv4_face_textures5.js", "js/examples/face_tracking/face_texture_overlay.js"],
+    "Masc 6": ["assets/brfv4_face_textures6.js", "js/examples/face_tracking/face_texture_overlay.js"],
+    "Masc 7": ["assets/brfv4_face_textures7.js", "js/examples/face_tracking/face_texture_overlay.js"],
 
     "--------": null
   };
