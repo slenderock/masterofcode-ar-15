@@ -11,11 +11,11 @@
   "use strict";
 
   var urlMap = {
-    "Marcel": "assets/masks/horrorMask5 (1).png",
-    "Chris": "assets/brfv4_portrait_chris.jpg",
-    "woman old": "assets/brfv4_woman_old.jpg",
-    "women young": "assets/brfv4_women_young.jpg",
-    "Two Faces": "assets/brfv4_two_faces.jpg"
+    "Marcel": "assets/people/brfv4_portrait_marcel.jpg",
+    "Chris": "assets/people/brfv4_portrait_chris.jpg",
+    "woman old": "assets/people/brfv4_woman_old.jpg",
+    "women young": "assets/people/brfv4_women_young.jpg",
+    "Two Faces": "assets/people/brfv4_two_faces.jpg"
   };
   var labels = [];
   for (var key in urlMap) {
