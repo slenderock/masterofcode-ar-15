@@ -4,7 +4,6 @@
   if (typeof QuickSettings === "undefined") return;
 
   var urlMap = {
-
     "-------": null,
 
     "+++ Scheme +++": null,
@@ -16,7 +15,6 @@
     "advanced - face tracking - face texture overlay": ["assets/brfv4_face_textures.js", "js/examples/face_tracking/face_texture_overlay.js"],
 
     "--------": null
-
   };
   var labels = [];
   for (var key in urlMap) {

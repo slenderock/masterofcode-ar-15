@@ -3,12 +3,14 @@ body {
   width: 100vw;
   height: 100vh;
   position: fixed;
+  overflow: hidden;
 }
 
 .sidebar h2 {
   font-family: Arial, sans-serif;
   font-size: 30px;
   text-transform: uppercase;
+  margin-left: 100px;
   color: #dbdbdb
 }
 
@@ -18,7 +20,8 @@ body {
 }
 
 .mask-list img {
-  width: 7%;
+  width: 100px;
   margin-top: 1%;
+  box-shadow: #555 1px 1px 4px 4px;
 }
 
