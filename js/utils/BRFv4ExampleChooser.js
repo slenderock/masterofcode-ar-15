@@ -12,7 +12,9 @@
     "basic - face tracking - candide overlay": "js/examples/face_tracking/candide_overlay.js",
 
     "+++ Mascs +++": null,
-    "advanced - face tracking - face texture overlay": ["assets/brfv4_face_textures.js", "js/examples/face_tracking/face_texture_overlay.js"],
+    "Masc 1": ["assets/brfv4_face_textures1.js", "js/examples/face_tracking/face_texture_overlay.js"],
+    "Masc 2": ["assets/brfv4_face_textures2.js", "js/examples/face_tracking/face_texture_overlay.js"],
+    "Masc 3": ["assets/brfv4_face_textures3.js", "js/examples/face_tracking/face_texture_overlay.js"],
 
     "--------": null
   };
