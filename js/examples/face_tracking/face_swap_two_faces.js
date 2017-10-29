@@ -67,7 +67,7 @@
 
 			var uvData0 = prepareFaceTexture(face0, _ctxFace0);
 			var uvData1 = prepareFaceTexture(face1, _ctxFace1);
-
+			console.log(uvData0);
 			draw.drawTexture(face0.vertices, triangles, uvData1, _extractedFace1);
 			draw.drawTexture(face1.vertices, triangles, uvData0, _extractedFace0);
 		}
