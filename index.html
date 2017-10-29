@@ -12,34 +12,19 @@
   <script>
     window.onload = brfv4Example.start; //see js/BRFv4Demo.js
   </script>
-  <link rel="stylesheet" href="sidebar.css">
-
+  <link rel="stylesheet" href="css/sidebar.css">
 </head>
 
 <body>
-
   <div id="_wrapper">
     <sidebar class="sidebar">
       <h2>Choose your face!</h2>
       <ul class="mask-list">
-        <a href="#">
-          <li><img src="horror_mask.png"></li>
-        </a>
-        <a href="#">
-          <li><img src="horror_mask.png"></li>
-        </a>
-        <a href="#">
-          <li><img src="horror_mask.png"></li>
-        </a>
-        <a href="#">
-          <li><img src="horror_mask.png"></li>
-        </a>
-        <a href="#">
-          <li><img src="horror_mask.png"></li>
-        </a>
-
+        <li><a href="#"><img src="assets/masks/horror_mask.png"> </a></li>
+        <li><a href="#"><img src="assets/masks/horrormask6.png"> </a></li>
       </ul>
     </sidebar>
+
     <div id="_content">
       <video id="_webcam"></video>
       <canvas id="_imageData"></canvas>
@@ -50,13 +35,10 @@
       <div id="_stats"></div>
       <div id="_progressBar"></div>
     </div>
-
-    <div id="_subline"></div>
-    <div id="_highlight">
-      <pre><code class="javascript" id="_gist"></code></pre>
-    </div>
   </div>
-
   <div id="_settingsRight"></div>
+  <script>
+
+  </script>
 </body>
 </html>
