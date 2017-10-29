@@ -14,189 +14,189 @@
 // createVideo(id, width, height, parent)
 
 (function () {
-	"use strict";
+  "use strict";
 
-	var dom			= brfv4Example.dom;
+  var dom = brfv4Example.dom;
 
-	dom.stageWidth	= 640;
-	dom.stageHeight	= 480;
+  dom.stageWidth = 640;
+  dom.stageHeight = 480;
 
-	dom.updateLayout = function(width, height) {
-	
-		// update resolution, video size, canvas sizes etc.
+  dom.updateLayout = function (width, height) {
 
-		dom.stageWidth	= width;
-		dom.stageHeight	= height;
-	
-		var getElement			= dom.getElement;
-		var updateElementSize	= dom.updateElementSize;
-	
-		updateElementSize(getElement("_content"), 		width, height, 0);
-		updateElementSize(getElement("_drawing"), 		width, height, 1);
-		updateElementSize(getElement("_faceSub"), 		width, height, 1);
-		updateElementSize(getElement("_t3d"), 			width, height, 1);
-		updateElementSize(getElement("_f3d"), 			width, height, 1);
-		updateElementSize(getElement("_webcam"),		width, height, 1);
-		updateElementSize(getElement("_imageData"),		width, height, 1);
+    // update resolution, video size, canvas sizes etc.
 
-		var subline = getElement("_subline");
-		if(subline) subline.style.top = (height + 10) + "px";
-	
-		var highlight = getElement("_highlight");
-		if(highlight) highlight.style.top = (height + 45) + "px";
-	};
-	
-	dom.updateHeadline = function(text) {
-	
-		var subline = dom.getElement("_subline");
-		if(subline) {
-			while(text.indexOf("\n") >= 0) {
-				text = text.replace("\n", "<br>");
-			}
-			subline.innerHTML = "<b>" + text + "</b>";
-		}
-	};
-	
-	dom.updateCodeSnippet = function(text) {
-	
-		var gist = dom.getElement("_gist");
-		if(gist && hljs) {
+    dom.stageWidth = width;
+    dom.stageHeight = height;
 
-			var lines = text.split("\n");
+    var getElement = dom.getElement;
+    var updateElementSize = dom.updateElementSize;
 
-			var i = 0;
-			var l = lines.length;
+    updateElementSize(getElement("_content"), width, height, 0);
+    updateElementSize(getElement("_drawing"), width, height, 1);
+    updateElementSize(getElement("_faceSub"), width, height, 1);
+    updateElementSize(getElement("_t3d"), width, height, 1);
+    updateElementSize(getElement("_f3d"), width, height, 1);
+    updateElementSize(getElement("_webcam"), width, height, 1);
+    updateElementSize(getElement("_imageData"), width, height, 1);
 
-			for(; i < l; i++) {
+    var subline = getElement("_subline");
+    if (subline) subline.style.top = (height + 10) + "px";
 
-				var line = lines[i];
+    var highlight = getElement("_highlight");
+    if (highlight) highlight.style.top = (height + 45) + "px";
+  };
 
-				while(line.indexOf("	") >= 0) {
+  dom.updateHeadline = function (text) {
 
-					var k = line.indexOf("	");
-					var repStr = "";
+    var subline = dom.getElement("_subline");
+    if (subline) {
+      while (text.indexOf("\n") >= 0) {
+        text = text.replace("\n", "<br>");
+      }
+      subline.innerHTML = "<b>" + text + "</b>";
+    }
+  };
 
-					k = 4 - (k % 4);
+  dom.updateCodeSnippet = function (text) {
 
-					while(k-- > 0) {
-						repStr += " ";
-					}
+    var gist = dom.getElement("_gist");
+    if (gist && hljs) {
 
-					line = line.replace("	", repStr);
-				}
+      var lines = text.split("\n");
 
-				lines[i] = line;
-			}
+      var i = 0;
+      var l = lines.length;
 
-			text = lines.join("\n");
+      for (; i < l; i++) {
 
-			gist.innerHTML = text;
-			hljs.highlightBlock(gist);
-		}
-	};
-	
-	dom.getElement = function(elementId) {
-	
-		var element = dom[elementId];
-		if(!element) {
-	
-			element = document.getElementById(elementId);
-			if(element) {
-				dom[elementId] = element;
-			}
-		}
-	
-		return element;
-	};
-	
-	dom.updateElementSize = function(element, width, height, whatToUpdate) {
-	
-		if(element) {
-	
-			if(whatToUpdate === 0) { // div
-				element.style.width		= width  + "px";
-				element.style.height	= height + "px";
-			} else if(whatToUpdate === 1) { // canvas, video
-				element.width			= width;
-				element.height			= height;
-			} else if(whatToUpdate === 2) { // utility class instance
-				element.updateLayout(width, height);
-			}
-		}
-	};
+        var line = lines[i];
 
-	dom.addElement = function(element, parent) {
+        while (line.indexOf("	") >= 0) {
 
-		if(element) {
+          var k = line.indexOf("	");
+          var repStr = "";
 
-			var addToDom = true;
+          k = 4 - (k % 4);
 
-			if(parent) {
+          while (k-- > 0) {
+            repStr += " ";
+          }
 
-				var p = document.getElementById(parent);
-				if(p) {
-					p.appendChild(element);
-					addToDom = false;
-				}
-			}
+          line = line.replace("	", repStr);
+        }
 
-			if(addToDom) {
-				document.body.appendChild(element);
-			}
-		}
-	};
+        lines[i] = line;
+      }
 
-	dom.createElement = function(htmlTag, id, width, height, parent) {
+      text = lines.join("\n");
 
-		var tag = null;
+      gist.innerHTML = text;
+      hljs.highlightBlock(gist);
+    }
+  };
 
-		if(htmlTag === "canvas" || htmlTag === "video" || htmlTag === "div") {
-	
-			tag = document.createElement(htmlTag);
-			tag.id = id;
+  dom.getElement = function (elementId) {
 
-			if(width !== 0 && height !== 0) {
-				dom.updateElementSize(tag, width, height, (htmlTag !== "div") ? 1 : 0);
-			}
+    var element = dom[elementId];
+    if (!element) {
 
-			dom.addElement(tag, parent);
-		}
+      element = document.getElementById(elementId);
+      if (element) {
+        dom[elementId] = element;
+      }
+    }
 
-		return tag;
-	};
+    return element;
+  };
 
-	dom.createDiv = function(id, parent) {
+  dom.updateElementSize = function (element, width, height, whatToUpdate) {
 
-		var tag = document.getElementById(id);
+    if (element) {
 
-		if(!tag) {	// Not found? Create it.
-			tag = dom.createElement("div", id, 0, 0, parent);
-		}
+      if (whatToUpdate === 0) { // div
+        element.style.width = width + "px";
+        element.style.height = height + "px";
+      } else if (whatToUpdate === 1) { // canvas, video
+        element.width = width;
+        element.height = height;
+      } else if (whatToUpdate === 2) { // utility class instance
+        element.updateLayout(width, height);
+      }
+    }
+  };
 
-		return tag;
-	};
-	
-	dom.createCanvas = function(id, width, height, parent) {
+  dom.addElement = function (element, parent) {
 
-		var tag = document.getElementById(id);
+    if (element) {
 
-		if(!tag) {	// Not found? Create it.
-			tag = dom.createElement("canvas", id, width, height, parent);
-		} else { 	// Found? Then update size.
-			dom.updateElementSize(tag, width, height, 1);
-		}
+      var addToDom = true;
 
-		return tag;
-	};
-	
-	dom.createVideo = function(id, width, height, parent) {
+      if (parent) {
 
-		var tag = document.getElementById(id);
+        var p = document.getElementById(parent);
+        if (p) {
+          p.appendChild(element);
+          addToDom = false;
+        }
+      }
 
-		if(!tag) {	// Not found? Create it.
-			tag = dom.createElement("video", id, width, height, parent);
-		}
+      if (addToDom) {
+        document.body.appendChild(element);
+      }
+    }
+  };
 
-		return tag;
-	};
+  dom.createElement = function (htmlTag, id, width, height, parent) {
+
+    var tag = null;
+
+    if (htmlTag === "canvas" || htmlTag === "video" || htmlTag === "div") {
+
+      tag = document.createElement(htmlTag);
+      tag.id = id;
+
+      if (width !== 0 && height !== 0) {
+        dom.updateElementSize(tag, width, height, (htmlTag !== "div") ? 1 : 0);
+      }
+
+      dom.addElement(tag, parent);
+    }
+
+    return tag;
+  };
+
+  dom.createDiv = function (id, parent) {
+
+    var tag = document.getElementById(id);
+
+    if (!tag) {	// Not found? Create it.
+      tag = dom.createElement("div", id, 0, 0, parent);
+    }
+
+    return tag;
+  };
+
+  dom.createCanvas = function (id, width, height, parent) {
+
+    var tag = document.getElementById(id);
+
+    if (!tag) {	// Not found? Create it.
+      tag = dom.createElement("canvas", id, width, height, parent);
+    } else { 	// Found? Then update size.
+      dom.updateElementSize(tag, width, height, 1);
+    }
+
+    return tag;
+  };
+
+  dom.createVideo = function (id, width, height, parent) {
+
+    var tag = document.getElementById(id);
+
+    if (!tag) {	// Not found? Create it.
+      tag = dom.createElement("video", id, width, height, parent);
+    }
+
+    return tag;
+  };
 })();

@@ -12,149 +12,149 @@
 //
 // setupWebcam(webcamVideo, imageDataCanvas, resolution, onImageDataReady) // video, canvas, Rectangle, callback
 
-(function(){
-	"use strict";
+(function () {
+  "use strict";
 
-	var example		= brfv4Example;
-	var imageData	= example.imageData;
-	var trace		= example.trace;
-	var webcam		= imageData.webcam;
-	
-	webcam.setupStream = function(video, width, height, fps, callback) {
+  var example = brfv4Example;
+  var imageData = example.imageData;
+  var trace = example.trace;
+  var webcam = imageData.webcam;
 
-		trace("webcam.setupStream: isPlaying: " + webcam.isPlaying);
+  webcam.setupStream = function (video, width, height, fps, callback) {
 
-		webcam.video			= video;
-		webcam.constraints		= {video: {width: width, height: height, frameRate: fps}};
-		webcam.onCameraReady	= callback;
+    trace("webcam.setupStream: isPlaying: " + webcam.isPlaying);
 
-		webcam.startStream();
-	};
+    webcam.video = video;
+    webcam.constraints = {video: {width: width, height: height, frameRate: fps}};
+    webcam.onCameraReady = callback;
 
-	webcam.startStream = function() {
+    webcam.startStream();
+  };
 
-		webcam.stopStream();
+  webcam.startStream = function () {
 
-		trace("webcam.startStream: try: " +
-			webcam.constraints.video.width + "x" + webcam.constraints.video.height);
+    webcam.stopStream();
 
-		window.navigator.mediaDevices.getUserMedia(webcam.constraints)
-			.then (webcam.onStreamFetched)
-			.catch(webcam.onStreamError);
-	};
+    trace("webcam.startStream: try: " +
+      webcam.constraints.video.width + "x" + webcam.constraints.video.height);
 
-	webcam.stopStream = function() {
+    window.navigator.mediaDevices.getUserMedia(webcam.constraints)
+      .then(webcam.onStreamFetched)
+      .catch(webcam.onStreamError);
+  };
 
-		if(webcam.isPlaying) {
-			trace("webcam.stopStream: isPlaying: " + webcam.isPlaying);
-		}
+  webcam.stopStream = function () {
 
-		webcam.isPlaying = false;
+    if (webcam.isPlaying) {
+      trace("webcam.stopStream: isPlaying: " + webcam.isPlaying);
+    }
 
-		if (webcam.stream !== null) {
-			webcam.stream.getTracks().forEach(function(track) {
-				track.stop();
-			});
-			webcam.stream = null;
-		}
-		if(webcam.video !== null && webcam.video.srcObject !== null) {
-			webcam.video.srcObject = null;
-		}
-	};
+    webcam.isPlaying = false;
 
-	webcam.onStreamFetched = function(mediaStream) {
+    if (webcam.stream !== null) {
+      webcam.stream.getTracks().forEach(function (track) {
+        track.stop();
+      });
+      webcam.stream = null;
+    }
+    if (webcam.video !== null && webcam.video.srcObject !== null) {
+      webcam.video.srcObject = null;
+    }
+  };
 
-		webcam.stream = mediaStream;
+  webcam.onStreamFetched = function (mediaStream) {
 
-		if(webcam.video !== null) {
-			webcam.video.srcObject = mediaStream;
-			webcam.video.play();
-			webcam.onStreamDimensionsAvailable();
-		}
-	};
+    webcam.stream = mediaStream;
 
-	webcam.onStreamDimensionsAvailable = function() {
+    if (webcam.video !== null) {
+      webcam.video.srcObject = mediaStream;
+      webcam.video.play();
+      webcam.onStreamDimensionsAvailable();
+    }
+  };
 
-		// As we can't be sure, what resolution we get, we need to read it
-		// from the already playing stream to be sure.
+  webcam.onStreamDimensionsAvailable = function () {
 
-		if(webcam.video.videoWidth === 0) {
+    // As we can't be sure, what resolution we get, we need to read it
+    // from the already playing stream to be sure.
 
-			trace("webcam.onStreamDimensionsAvailable: waiting");
+    if (webcam.video.videoWidth === 0) {
 
-			clearTimeout(webcam.onStreamDimensionsAvailable_timeout);
+      trace("webcam.onStreamDimensionsAvailable: waiting");
 
-			webcam.onStreamDimensionsAvailable_timeout =
-				setTimeout(webcam.onStreamDimensionsAvailable, 100);
+      clearTimeout(webcam.onStreamDimensionsAvailable_timeout);
 
-		} else {
+      webcam.onStreamDimensionsAvailable_timeout =
+        setTimeout(webcam.onStreamDimensionsAvailable, 100);
 
-			trace("webcam.onStreamDimensionsAvailable: " + webcam.video.videoWidth + "x" + webcam.video.videoHeight);
+    } else {
 
-			// Now we know the dimensions of the stream. So tell the app, the camera is ready.
-			webcam.isPlaying = true;
+      trace("webcam.onStreamDimensionsAvailable: " + webcam.video.videoWidth + "x" + webcam.video.videoHeight);
 
-			if(webcam.onCameraReady) {
-				webcam.onCameraReady(true);
-			}
-		}
-	};
+      // Now we know the dimensions of the stream. So tell the app, the camera is ready.
+      webcam.isPlaying = true;
 
-	webcam.onStreamError = function(event) {
-		trace("webcam.onStreamError: " + event);
+      if (webcam.onCameraReady) {
+        webcam.onCameraReady(true);
+      }
+    }
+  };
 
-		webcam.isPlaying = false;
+  webcam.onStreamError = function (event) {
+    trace("webcam.onStreamError: " + event);
 
-		if(webcam.onCameraReady) {
-			webcam.onCameraReady(false);
-		}
-	};
+    webcam.isPlaying = false;
 
-	webcam.setup = function(webcamVideo, imageDataCanvas, resolution, onImageDataReady) {
+    if (webcam.onCameraReady) {
+      webcam.onCameraReady(false);
+    }
+  };
 
-		if(!webcamVideo || !imageDataCanvas) {
-			trace("setupWebcam: Please add a <video> tag with id='_webcam' and " +
-				"a <canvas> tag with id='_imageData' to the DOM.", true);
-			return;
-		}
+  webcam.setup = function (webcamVideo, imageDataCanvas, resolution, onImageDataReady) {
 
-		if(!resolution) {
-			trace("setupWebcam: Please setup a resolution Rectangle.", true);
-			return;
-		}
+    if (!webcamVideo || !imageDataCanvas) {
+      trace("setupWebcam: Please add a <video> tag with id='_webcam' and " +
+        "a <canvas> tag with id='_imageData' to the DOM.", true);
+      return;
+    }
 
-		function onCameraReady(success) {
-			if(success) {
-				onImageDataReady(webcamVideo.videoWidth, webcamVideo.videoHeight);
-			} else {
-				alert("No camera found.");
-			}
-		}
+    if (!resolution) {
+      trace("setupWebcam: Please setup a resolution Rectangle.", true);
+      return;
+    }
 
-		imageData.type = function() {
-			return "webcam";
-		};
+    function onCameraReady(success) {
+      if (success) {
+        onImageDataReady(webcamVideo.videoWidth, webcamVideo.videoHeight);
+      } else {
+        alert("No camera found.");
+      }
+    }
 
-		imageData.init = function() {
-			webcam.setupStream(webcamVideo, resolution.width, resolution.height, 30, onCameraReady);
-		};
+    imageData.type = function () {
+      return "webcam";
+    };
 
-		imageData.dispose = function() {
-			webcam.stopStream();
-		};
+    imageData.init = function () {
+      webcam.setupStream(webcamVideo, resolution.width, resolution.height, 30, onCameraReady);
+    };
 
-		imageData.isAvailable = function() {
-			return webcam.isPlaying;
-		};
+    imageData.dispose = function () {
+      webcam.stopStream();
+    };
 
-		imageData.isStream = function() {
-			return true;
-		};
+    imageData.isAvailable = function () {
+      return webcam.isPlaying;
+    };
 
-		imageData.update = function() {
-			var _imageDataCtx = imageDataCanvas.getContext("2d");
-			_imageDataCtx.setTransform(-1.0, 0, 0, 1, resolution.width, 0); // mirrored
-			_imageDataCtx.drawImage(webcamVideo, 0, 0, resolution.width, resolution.height);
-		};
-	};
+    imageData.isStream = function () {
+      return true;
+    };
+
+    imageData.update = function () {
+      var _imageDataCtx = imageDataCanvas.getContext("2d");
+      _imageDataCtx.setTransform(-1.0, 0, 0, 1, resolution.width, 0); // mirrored
+      _imageDataCtx.drawImage(webcamVideo, 0, 0, resolution.width, resolution.height);
+    };
+  };
 })();
